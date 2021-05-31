@@ -25,7 +25,8 @@ function download_assignment(repo, prefix, file)
     print("$student ")
     url = "https://github.com/$repo/$prefix-$student.git"
     try
-      Git.run(`clone $url`)
+      isdir(prefix) || mkdir(prefix)
+      run(`git clone $url $prefix/$student`)
       printstyled("✓\n", color=:green)
     catch ex
       printstyled("×", color=:red)
